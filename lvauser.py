@@ -3,7 +3,9 @@
 from github import Github
 import os
 import subprocess
-
+import urllib.request
+import shutil
+from zipfile import ZipFile as zip
 
 class GHuser:
 
@@ -54,3 +56,18 @@ class GitUser:
         subprocess.run(cmd)
 
        # cmd = ["git", "-C", "repopath", "commit",]
+
+
+def download_instruction(url, inst_dirname,filename):
+    directory=os.path.join(os.getcwd(),"Instrukcje", inst_dirname)
+    filepath=os.path.join(directory,filename)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    with urllib.request.urlopen(url) as response, open(filepath, 'wb') as out_file:
+        shutil.copyfileobj(response, out_file)
+    archiwum=zip(filepath)
+    archiwum.extractall(directory,pwd=input("Podaj hasło do instrukcji: ").encode())
+    archiwum.close()
+    os.remove(filepath)
+
+
