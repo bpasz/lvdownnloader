@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from lvauser import GHuser,GitUser, download_instruction
+from lvauser import GHuser,GitUser, download_instruction,check_git
 import messages as msg
 import re
 import string
@@ -10,6 +10,7 @@ folder_prefix="Laboratorium "
 url=string.Template("http://labview.wemif.pwr.edu.pl/student/lab${nr}.zip")
 print(msg.welcome)
 gh_login=input("Uzytkownik GitHub: ")
+check_git()
 
 while 1:
 

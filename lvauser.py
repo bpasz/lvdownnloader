@@ -6,6 +6,8 @@ import subprocess
 import urllib.request
 import shutil
 from zipfile import ZipFile as zip
+import webbrowser as wb
+
 
 class GHuser:
 
@@ -71,3 +73,8 @@ def download_instruction(url, inst_dirname,filename):
     os.remove(filepath)
 
 
+def check_git():
+    if not shutil.which("git"):
+        print("GIT nie jest zainstalowany, LV Downloader nie bedzie dzialac")
+        if input("Przekierowac na strone do pobierania? (t/n)")=="t" :
+            wb.open("https://git-scm.com/download/win")
