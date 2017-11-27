@@ -17,7 +17,7 @@ class GHuser:
             self.gh.get_user().login   #Słuzy tylko sprawdzeniu czy udalo sie zalogowac
         except Exception as e:
             self.log_status = False
-            print('Blad: '+e)
+            print('Blad: '+str(e))
         else:
             self.log_status = True
             self.gh_user = self.gh.get_user()
@@ -49,6 +49,12 @@ class GitUser:
         local_repopath=os.path.join(self.repos_path,foldername)
         repopath = "https://github.com/{}/{}.git".format(username, reponame)
         cmd = ["git", "-C", local_repopath, "add", "--all"]
+        subprocess.run(cmd)
+
+        cmd=["git","-C", local_repopath, "config","--local", "user.name", username]
+        subprocess.run(cmd)
+
+        cmd = ["git", "-C", local_repopath, "config","--local","user.email", username + "@mail.com"]
         subprocess.run(cmd)
 
         cmd=["git","-C",local_repopath, "commit", "-m", "Dodany z LV Downloader"]
