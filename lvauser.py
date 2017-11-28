@@ -57,6 +57,12 @@ class GitUser:
         cmd = ["git", "-C", local_repopath, "config","--local","user.email", username + "@mail.com"]
         subprocess.run(cmd)
 
+        cmd = ["git", "-C", local_repopath, "config", "--local", "credential.helper", ""]
+        subprocess.run(cmd)
+
+        cmd = ["git", "-C", local_repopath, "config", "--local", "credential.username", username]
+        subprocess.run(cmd)
+
         cmd=["git","-C",local_repopath, "commit", "-m", "Dodany z LV Downloader"]
         subprocess.run(cmd)
 
