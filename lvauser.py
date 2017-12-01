@@ -43,7 +43,20 @@ class GitUser:
         #-C oznaczna że git pracuje w fodlerze zadania
         folderpath=os.path.join(self.repos_path,foldername)
         cmd = ["git", "clone", repopath, folderpath]
-        subprocess.run(cmd)
+        result=subprocess.run(cmd)
+        print("Odpowiedź: " + str(result.returncode))
+
+    def clone_or_pull(self,reponame, username, foldername):
+        repopath = "https://github.com/{}/{}.git".format(username, reponame)
+        # -C oznaczna że git pracuje w fodlerze zadania
+        folderpath = os.path.join(self.repos_path, foldername)
+        if os.path.isdir(folderpath):
+            cmd=["git","-C",folderpath,"pull",repopath]
+            result = subprocess.run(cmd)
+        else:
+            cmd = ["git", "clone", repopath, folderpath]
+            result = subprocess.run(cmd)
+
 
     def commit_and_push(self,reponame,username,foldername):
         local_repopath=os.path.join(self.repos_path,foldername)

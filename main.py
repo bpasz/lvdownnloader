@@ -26,12 +26,12 @@ while 1:
                 gu.clone(reponame, gh_login, folder_prefix + prompt)
             else:
                 print("Zly numer cwiczenia!")
-    elif cmd=="c":
+    elif cmd=="s":
         prompt = input("podaj numer ćwiczenia (1-10):")
         if re.fullmatch("^[1-9]|10$", prompt):
             reponame = repo_prefix + prompt
             gu=GitUser()
-            gu.clone(reponame,gh_login,folder_prefix+prompt)
+            gu.clone_or_pull(reponame,gh_login,folder_prefix+prompt)
         else:
             print("Zly numer cwiczenia")
 
