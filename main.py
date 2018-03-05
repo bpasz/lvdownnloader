@@ -4,10 +4,11 @@ from lvauser import GHuser,GitUser, download_instruction,check_git
 import messages as msg
 import re
 import string
-repo_prefix="LVLab"
+repo_prefix="adv_LVLab"
 org_name="wemif-lva"
 folder_prefix="Laboratorium "
-url=string.Template("http://labview.wemif.pwr.edu.pl/student/lab${nr}.zip")
+url=string.Template("http://labview.wemif.pwr.edu.pl/student/advlab${nr}.zip")
+url_ins=string.Template("http://labview.wemif.pwr.edu.pl/instruktor/advlab${nr}_ins.zip")
 print(msg.welcome)
 gh_login=input("Uzytkownik GitHub: ")
 check_git()
@@ -49,6 +50,14 @@ while 1:
             download_instruction(url.substitute(nr=prompt),"Laboratorium {}".format(prompt),"lab{}.zip".format(prompt))
         else:
             print("Zły numer ćwiczenia")
+    elif cmd == "i":
+        prompt = input("podaj numer ćwiczenia (1-10):")
+        if re.fullmatch("^[1-9]|10$", prompt):
+            download_instruction(url_ins.substitute(nr=prompt), "Laboratorium {}".format(prompt),
+                                 "lab{}.zip".format(prompt))
+        else:
+            print("Zły numer ćwiczenia")
+
     elif cmd=="w":
         break
     else:
