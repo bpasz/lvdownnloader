@@ -13,6 +13,10 @@ print(msg.welcome)
 gh_login=input("Uzytkownik GitHub: ")
 check_git()
 
+if gh_login.lower()=="mikolajbadura":
+    print("Siema Mikuś Cebulaku.....czego chcesz?")
+
+
 while 1:
 
     cmd=input("Wybór: ")
