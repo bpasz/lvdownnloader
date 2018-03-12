@@ -18,52 +18,53 @@ if gh_login.lower()=="mikolajbadura":
 
 
 while 1:
-
-    cmd=input("Wybór: ")
-    if cmd=="f":
-        ghuser=GHuser(gh_login,msg.logowanie_gh())
-        if ghuser.log_status:
-            prompt=input("podaj numer ćwiczenia (1-10):")
-            if re.fullmatch("^[1-9]|10$",prompt):
-                reponame=repo_prefix+prompt
-                ghuser.forkgh(org_name,reponame)
-                gu = GitUser()
-                gu.clone(reponame, gh_login, folder_prefix + prompt)
+    try:
+        cmd=input("Wybór: ")
+        if cmd=="f" or cmd=="1":
+            ghuser=GHuser(gh_login,msg.logowanie_gh())
+            if ghuser.log_status:
+                prompt=input("podaj numer ćwiczenia (1-10):")
+                if re.fullmatch("^[1-9]|10$",prompt):
+                    reponame=repo_prefix+prompt
+                    ghuser.forkgh(org_name,reponame)
+                    gu = GitUser()
+                    gu.clone(reponame, gh_login, folder_prefix + prompt)
+                else:
+                    print("Zly numer cwiczenia!")
+        elif cmd=="s" or cmd=="2":
+            prompt = input("podaj numer ćwiczenia (1-10):")
+            if re.fullmatch("^[1-9]|10$", prompt):
+                reponame = repo_prefix + prompt
+                gu=GitUser()
+                gu.clone_or_pull(reponame,gh_login,folder_prefix+prompt)
             else:
-                print("Zly numer cwiczenia!")
-    elif cmd=="s":
-        prompt = input("podaj numer ćwiczenia (1-10):")
-        if re.fullmatch("^[1-9]|10$", prompt):
-            reponame = repo_prefix + prompt
-            gu=GitUser()
-            gu.clone_or_pull(reponame,gh_login,folder_prefix+prompt)
-        else:
-            print("Zly numer cwiczenia")
+                print("Zly numer cwiczenia")
 
-    elif cmd=="z":
-        prompt = input("podaj numer ćwiczenia (1-10):")
-        if re.fullmatch("^[1-9]|10$", prompt):
-            reponame = repo_prefix + prompt
-            gu = GitUser()
-            gu.commit_and_push(reponame, gh_login, folder_prefix + prompt)
-        else:
-            print("Zly numer cwiczenia")
-    elif cmd=="p":
-        prompt = input("podaj numer ćwiczenia (1-10):")
-        if re.fullmatch("^[1-9]|10$", prompt):
-            download_instruction(url.substitute(nr=prompt),"Laboratorium {}".format(prompt),"lab{}.zip".format(prompt))
-        else:
-            print("Zły numer ćwiczenia")
-    elif cmd == "i":
-        prompt = input("podaj numer ćwiczenia (1-10):")
-        if re.fullmatch("^[1-9]|10$", prompt):
-            download_instruction(url_ins.substitute(nr=prompt), "Laboratorium {}".format(prompt),
-                                 "lab{}.zip".format(prompt))
-        else:
-            print("Zły numer ćwiczenia")
+        elif cmd=="z" or cmd=="3":
+            prompt = input("podaj numer ćwiczenia (1-10):")
+            if re.fullmatch("^[1-9]|10$", prompt):
+                reponame = repo_prefix + prompt
+                gu = GitUser()
+                gu.commit_and_push(reponame, gh_login, folder_prefix + prompt)
+            else:
+                print("Zly numer cwiczenia")
+        elif cmd=="p" or cmd=="4":
+            prompt = input("podaj numer ćwiczenia (1-10):")
+            if re.fullmatch("^[1-9]|10$", prompt):
+                download_instruction(url.substitute(nr=prompt),"Laboratorium {}".format(prompt),"lab{}.zip".format(prompt))
+            else:
+                print("Zły numer ćwiczenia")
+        elif cmd == "i":
+            prompt = input("podaj numer ćwiczenia (1-10):")
+            if re.fullmatch("^[1-9]|10$", prompt):
+                download_instruction(url_ins.substitute(nr=prompt), "Instruktor Laboratorium {}".format(prompt),"lab{}.zip".format(prompt))
+            else:
+                print("Zły numer ćwiczenia")
 
-    elif cmd=="w":
-        break
-    else:
-        print("Blędna komenda")
+        elif cmd=="w":
+            break
+        else:
+            print("Blędna komenda")
+    except Exception as e:
+        print("Wystapil blad ", str(e))
 
