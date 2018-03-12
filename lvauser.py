@@ -31,7 +31,7 @@ class GHuser:
             self.gh_user.create_fork(master_repo)
 
         except Exception as e:
-            print("Nie udało się wykonać \"fork\", Blad"+ e)
+            print("Nie udało się wykonać \"fork\", Blad"+ str(e))
             return True
         else:
             return False
