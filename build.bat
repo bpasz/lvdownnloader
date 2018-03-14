@@ -1,1 +1,0 @@
-%windir%\System32\cmd.exe "/K" build2
