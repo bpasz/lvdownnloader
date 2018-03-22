@@ -61,7 +61,7 @@ while 1:
             else:
                 print("Zły numer ćwiczenia")
 
-        elif cmd=="w":
+        elif cmd=="w" or cmd=="5":
             break
         else:
             print("Blędna komenda")
